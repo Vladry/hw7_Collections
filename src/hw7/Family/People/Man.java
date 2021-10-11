@@ -1,6 +1,10 @@
 package hw7.Family.People;
 
 import hw7.Family.Animals.Pet;
+import hw7.Family.DayOfWeek;
+
+import java.util.List;
+import java.util.Map;
 
 final public class Man extends Human {
 
@@ -12,7 +16,7 @@ final public class Man extends Human {
         super(name, surname, year);
     }
     Man(String name, String surname, int year,
-        int iq, String[][] schedule, Family family){
+        int iq, Map<DayOfWeek, List<String>> schedule, Family family){
         super(name, surname, year, iq, schedule, family);
     }
 

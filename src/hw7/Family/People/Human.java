@@ -3,16 +3,15 @@ package hw7.Family.People;
 import hw7.Family.Animals.Pet;
 import hw7.Family.DayOfWeek;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Human {
 
     private String name;
     private String surname;
     private int year;
-    private int iq; //from 0 to 100;
-    private String[][] schedule;
+    private int iq;
+    private Map<DayOfWeek, List<String>> schedule;
     private Family family;
 
     static {
@@ -20,14 +19,15 @@ public abstract class Human {
     }
 
     {
-        schedule = new String[7][2];
-        schedule[0][0] = DayOfWeek.SUNDAY.name().toLowerCase();
-        schedule[1][0] = DayOfWeek.MONDAY.name().toLowerCase();
-        schedule[3][0] = DayOfWeek.TUESDAY.name().toLowerCase();
-        schedule[2][0] = DayOfWeek.WEDNESDAY.name().toLowerCase();
-        schedule[4][0] = DayOfWeek.THURSDAY.name().toLowerCase();
-        schedule[5][0] = DayOfWeek.FRIDAY.name().toLowerCase();
-        schedule[6][0] = DayOfWeek.SATURDAY.name().toLowerCase();
+
+        schedule = new HashMap<>();
+
+        for (DayOfWeek weekDay : DayOfWeek.values()) {
+            List<String> tasks = new ArrayList<>();
+            schedule.put(weekDay, tasks);
+        }
+
+
 //        System.out.println("создается новый объект Human");
         Random rnd = new Random();
         iq = rnd.nextInt(101);
@@ -43,13 +43,12 @@ public abstract class Human {
     }
 
     Human(String name, String surname, int year,
-          int iq, String[][] schedule, Family family) {
+          int iq, Map<DayOfWeek, List<String>> schedule, Family family) {
         this(name, surname, year);
         this.iq = iq;
-        this.schedule = schedule;
+        this.schedule.putAll(schedule);
         this.family = family;
     }
-
 
 
     public void greetPet(Pet pet) {
@@ -122,13 +121,13 @@ public abstract class Human {
 
     ;
 
-    public String[][] getSchedule() {
+    public Map<DayOfWeek, List<String>> getSchedule() {
         return this.schedule;
     }
 
     ;
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<DayOfWeek, List<String>> schedule) {
         this.schedule = schedule;
     }
 
@@ -150,7 +149,7 @@ public abstract class Human {
         return "Human{ name=" + this.getName() + ", surname= " + this.getSurname() +
                 ", year=" + this.getYear() + ", iq=" + this.getIq() +
 //                ", family=" + this.getFamily().toString() +
-                ", schedule=" + Arrays.deepToString(this.getSchedule()) +
+                ", schedule=" + this.getSchedule().toString() +
                 "} \n ";
     }
 

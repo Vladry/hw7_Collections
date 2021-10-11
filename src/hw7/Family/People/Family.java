@@ -2,7 +2,8 @@ package hw7.Family.People;
 
 import hw7.Family.Animals.Pet;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static hw7.Family.People.BabyFactory.deliverABaby;
 
@@ -10,7 +11,7 @@ public class Family implements HumanCreator {
 
     private Human mother;
     private Human father;
-    private Human[] children;
+    private final List<Human> children;
     private Pet pet;
 
     static {
@@ -18,7 +19,7 @@ public class Family implements HumanCreator {
     }
 
     {
-        this.children = new Human[1];
+        this.children = new ArrayList<>();
         System.out.println("создается новый объект Family");
     }
 
@@ -32,39 +33,20 @@ public class Family implements HumanCreator {
     }
 
     public void addChild(Human child) {
-        if (children[0] != null) {
-            Human[] childrenNew = new Human[children.length + 1];
-            System.arraycopy(children, 0, childrenNew, 0, children.length);
-            childrenNew[children.length] = child;
-            children = childrenNew;
-        } else {
-            children[0] = child;
-        }
+        children.add(child);
     }
 
     public boolean deleteChild(int index) {
-        if (index < 0 || index >= children.length || children[index] == null ) {
+        if (index < 0 || index >= children.size() || children.get(index) == null) {
             return false;
         }
-        System.arraycopy(children, index + 1, children, index, children.length - 1 - index);
-        Human[] newChildren = new Human[children.length - 1];
-        System.arraycopy(children, 0, newChildren, 0, children.length - 1);
-        children = newChildren;
+        children.remove(index);
         return true;
 
     }
 
-
-    private int findNextFreeCell() {
-        for (int i = children.length - 1; i >= 0; i--) {
-            if (children[i] != null)
-                return i + 1;
-        }
-        return 0;
-    }
-
-    public int countFamily() {
-        return findNextFreeCell() + 2;
+    public int countFamily(int numOfChildren) {
+        return numOfChildren + 2;
     }
 
     public Human getMother() {
@@ -83,7 +65,7 @@ public class Family implements HumanCreator {
         this.father = father;
     }
 
-    public Human[] getChildren() {
+    public List getChildren() {
         return this.children;
     }
 
@@ -104,7 +86,7 @@ public class Family implements HumanCreator {
     public String toString() {
         return "Family{\n mother= " + mother +
                 "father= " + father +
-                "children= " + Arrays.toString(children) + "\n" +
+                "children= " + children.toString() + "\n" +
                 "pet= " + pet +
                 "}\n ";
     }
@@ -115,4 +97,3 @@ public class Family implements HumanCreator {
     }
 }
 
-/* Решите какие поля стоит использовать для сравнения в методе equals() (к примеру, привычки животного могут меняться).*/

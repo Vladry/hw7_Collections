@@ -1,6 +1,6 @@
 package hw7.Family.Animals;
 
-import java.util.Arrays;
+import java.util.List;
 
 public abstract class Pet {
 
@@ -8,7 +8,7 @@ public abstract class Pet {
     protected String nickname;
     protected int age;
     protected int trickLevel; //from 0 to 100
-    protected String[] habits;
+    protected List<String> habits;
 
     static {
         System.out.println("загружается новый класс Pet");
@@ -36,10 +36,6 @@ public abstract class Pet {
     }
 
     public abstract void respond();
-
-//    public default void foul() {
-//        System.out.println("Я - неизвестное животное и я нагадило!");
-//    };
 
     public Species getSpecies() {
         return species;
@@ -74,12 +70,12 @@ public abstract class Pet {
         this.trickLevel = trickLevel;
     }
 
-    public String[] getHabits() {
+    public List<String> getHabits() {
         return habits;
     }
 
 
-    public void setHabits(String[] habits) {
+    public void setHabits(List<String> habits) {
         this.habits = habits;
     }
 
@@ -88,7 +84,7 @@ public abstract class Pet {
     public String toString() {
         return species + " {nickname='" + nickname + "',  age=" + age + ", trickLevel=" +
                 trickLevel +
-                "habits=" + Arrays.toString(getHabits()) +
+                "habits=" + getHabits().toString() +
                 "}\n";
     }
 
