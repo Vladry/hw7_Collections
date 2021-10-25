@@ -1,6 +1,7 @@
 package hw7.Family.Animals;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract class Pet {
 
@@ -8,7 +9,7 @@ public abstract class Pet {
     protected String nickname;
     protected int age;
     protected int trickLevel; //from 0 to 100
-    protected List<String> habits;
+    protected Set<String> habits;
 
     static {
         System.out.println("загружается новый класс Pet");
@@ -70,12 +71,12 @@ public abstract class Pet {
         this.trickLevel = trickLevel;
     }
 
-    public List<String> getHabits() {
+    public Set<String> getHabits() {
         return habits;
     }
 
 
-    public void setHabits(List<String> habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
     }
 

@@ -4,6 +4,7 @@ import hw7.Family.Animals.Pet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static hw7.Family.People.BabyFactory.deliverABaby;
 
@@ -13,6 +14,7 @@ public class Family implements HumanCreator {
     private Human father;
     private final List<Human> children;
     private Pet pet;
+    private Set<Pet> pets;
 
     static {
         System.out.println("загружается новый класс Family");
@@ -65,7 +67,7 @@ public class Family implements HumanCreator {
         this.father = father;
     }
 
-    public List getChildren() {
+    public List<Human> getChildren() {
         return this.children;
     }
 
